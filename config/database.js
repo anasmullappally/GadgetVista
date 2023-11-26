@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { config } from "dotenv";
+import logger from "./logger.js";
 config();
 
 export const connectDB = async () => {
@@ -10,12 +11,18 @@ export const connectDB = async () => {
     // Connect to MongoDB
     await mongoose.connect(uri);
 
-    console.log("Connected successfully to MongoDB");
+    logger.info({
+      label: "Database",
+      message: `Database connected successfully`,
+    });
 
     // Return the connected database object if needed
     return mongoose.connection;
   } catch (error) {
-    console.error("Connection error:", error.message);
+    logger.info({
+      label: "Database",
+      message: `connection Error : ${error.message}`,
+    });
     // Exit the process on connection error
     process.exit(1);
   }

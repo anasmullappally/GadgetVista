@@ -24,6 +24,7 @@ app.use(express.json());
 app.use(cors(corsOptions));
 
 import authRouter from "./routes/auth.js";
+import logger from "./config/logger.js";
 
 app.get("/", (req, res) => res.send("Connected successfully"));
 
@@ -34,5 +35,8 @@ app.use(errorHandler);
 
 app.listen(PORT, async () => {
   await connectDB();
-  console.log(`Server connected successfully on ${PORT}`);
+  logger.info({
+    label: "Server",
+    message: `Server connected successfully on ${PORT}`,
+  });
 });
