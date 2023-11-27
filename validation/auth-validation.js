@@ -13,7 +13,7 @@ import {
   fieldRequiredMessages,
 } from "../utils/message-store/common-messages.js";
 
-export const userValidationSchema = Joi.object({
+export const userRegistrationValidationSchema = Joi.object({
   firstName: nameValidation.messages({
     "string.empty": fieldEmptyMessages["firstName"],
     "string.pattern.base": fieldPatternMessages["firstName"],
@@ -48,5 +48,19 @@ export const userValidationSchema = Joi.object({
     "date.max": fieldMaxMessages["dateOfBirth"],
     "any.required": fieldRequiredMessages["dateOfBirth"],
     "any-invalid": fieldInvalidMessages["dateOfBirth"],
+  }),
+});
+
+export const loginValidationSchema = Joi.object({
+  email: emailValidation.messages({
+    "string.empty": fieldEmptyMessages["email"],
+    "string.email": fieldInvalidMessages["email"],
+    "any-Invalid": fieldInvalidMessages["email"],
+  }),
+  password: passwordValidation.messages({
+    "string.empty": fieldEmptyMessages["password"],
+    "string.pattern.base": fieldPatternMessages["password"],
+    "any.required": fieldRequiredMessages["password"],
+    "any-only": fieldInvalidMessages["password"],
   }),
 });
