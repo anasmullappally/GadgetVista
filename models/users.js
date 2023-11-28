@@ -36,8 +36,16 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    loginToken: {
+      type: Array,
+      default: []
+    }
   },
   { collection: "Users", timestamps: true }
 );
 
-export const User = mongoose.model("User", userSchema);
+export const Users = mongoose.model("Users", userSchema);

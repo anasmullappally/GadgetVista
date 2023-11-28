@@ -8,5 +8,6 @@ export const signupMessages = {
 export const loginMessages = {
   "no-user": "Credentials provided are not valid.",
   "wrong-password": "The password entered is incorrect.",
-  "success": "Login successful"
+  "success": "Login successful",
+  "block": 'Your account has been blocked. Please contact the administrator for further details.'
 };
