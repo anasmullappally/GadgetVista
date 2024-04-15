@@ -16,16 +16,19 @@ import routes from "./routes.js"; // importing routes
 
 import { APINotFound } from "./middleware/api-notfound.js";
 import { errorHandler } from "./middleware/error-handler.js";
-import { corsOptions } from "./config/cors.js";
+
+const clientURL =process.env.CLIENT
+const corsOptions = {
+    origin: clientURL,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+};
 
 // creating a instance of express application
 const app = express();
 
 // creating http server using the express server
 const httpServer = createServer(app);
-
-// use CORS middleware with customs options
-app.use(cors(corsOptions));
 
 // parsing incoming request data with extended options
 app.use(express.urlencoded({ extended: true }));
@@ -34,6 +37,9 @@ app.use(express.json());
 app.use(helmet());
 // //Swagger
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+
+// use CORS middleware with customs options
+app.use(cors(corsOptions));
 
 // api routes module
 app.use("/api", routes);

@@ -9,11 +9,10 @@ export const connectDB = async () => {
     const uri = process.env.MONGO_URI;
 
     // Connect to MongoDB
-    await mongoose.connect(uri);
-
+    const db = await mongoose.connect(uri);
     logger.info({
       label: "Database",
-      message: `Database connected successfully`,
+      message: `Database connected successfully : ${db.connections[0].name}`,
     });
 
     // Return the connected database object if needed

@@ -58,7 +58,7 @@ export const login = async (req, res, next) => {
     const { email, password } = value;
 
     const user = await Users.findOne({ email: email.toLowerCase() })
-      .select("email password block")
+      .select("email password block name role")
       .lean();
 
     if (!user) {
@@ -73,10 +73,18 @@ export const login = async (req, res, next) => {
     if (!passwordCorrect) {
       return res.status(HTTP_BAD_REQUEST).json({ success: false, message: loginMessages["wrong-password"] });
     }
-    const payload = { user: user._id }
-    const { accessToken, refreshToken } = await generateToken({ payload, accessSecretKey: process.env.ACCESS_TOKEN_SECRET, refreshSecretKey: process.env.REFRESH_TOKEN_SECRET })
 
-    return res.status(HTTP_STATUS_OK).json({ success: true, accessToken, refreshToken, message: loginMessages["success"] })
+    const payload = {
+      _id: user?._id,
+      name: user?.name,
+      email: user?.email,
+      dateOfBirth: user?.dateOfBirth,
+      phoneNumber: user?.phoneNumber,
+      role:user.role
+    }
+    const { accessToken, refreshToken } = await generateToken({ payload, accessSecretKey: process.env.ACCESS_TOKEN_SECRET, refreshSecretKey: process.env.REFRESH_TOKEN_SECRET })
+    //save refreshToken
+    return res.status(HTTP_STATUS_OK).json({ success: true, accessToken, message: loginMessages["success"] })
   } catch (error) {
     logger.error({ label: "login", message: error.message });
     next(error);

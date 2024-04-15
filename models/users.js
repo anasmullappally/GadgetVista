@@ -2,12 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    lastName: {
+    name: {
       type: String,
       required: true,
       trim: true,
@@ -39,6 +34,11 @@ const userSchema = new mongoose.Schema(
     verified: {
       type: Boolean,
       default: false,
+    },
+    role: {
+      type: String,
+      default: 'user',
+      enum: ["admin", "user"]
     },
     loginToken: {
       type: Array,
