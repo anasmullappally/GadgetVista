@@ -14,17 +14,11 @@ import {
 } from "../utils/message-store/common-messages.js";
 
 export const userRegistrationValidationSchema = Joi.object({
-  firstName: nameValidation.messages({
-    "string.empty": fieldEmptyMessages["firstName"],
-    "string.pattern.base": fieldPatternMessages["firstName"],
-    "any.required": fieldRequiredMessages["firstName"],
-    "any.only": fieldInvalidMessages["firstName"],
-  }),
-  lastName: nameValidation.messages({
-    "string.empty": fieldEmptyMessages["lastName"],
-    "string.pattern.base": fieldPatternMessages["lastName"],
-    "any.required": fieldRequiredMessages["lastName"],
-    "any.only": fieldInvalidMessages["lastName"],
+  name: nameValidation.messages({
+    "string.empty": fieldEmptyMessages["name"],
+    "string.pattern.base": fieldPatternMessages["name"],
+    "any.required": fieldRequiredMessages["name"],
+    "any.only": fieldInvalidMessages["name"],
   }),
   email: emailValidation.messages({
     "string.empty": fieldEmptyMessages["email"],
