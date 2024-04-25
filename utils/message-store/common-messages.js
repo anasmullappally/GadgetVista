@@ -57,6 +57,7 @@ export const fieldRequiredMessages = {
   shippingCharge: "Shipping Charge is required",
   variant: "variant is required",
   colors: "Colors is required",
+  releaseDate: "Date is required."
 };
 
 export const fieldPatternMessages = {
@@ -73,6 +74,7 @@ export const fieldPatternMessages = {
   price: "Price must be a positive number",
   shippingCharge: "Shipping Charge must be a positive number",
   quantity: "Quantity must be a positive number",
+  releaseDate: "Date must be in ISO date format (YYYY-MM-DD).",
 };
 
 export const fieldMaxMessages = {
@@ -86,6 +88,7 @@ export const fieldBaseMessages = {
   price: "Price must be Number",
   quantity: "Quantity must be Number",
   shippingCharge: "Shipping Charge must be Number",
+  releaseDate: "Date must be a valid date.",
 }
 
 export const fieldMinMessages = {
@@ -95,5 +98,10 @@ export const fieldMinMessages = {
   price: "Price can not be less than 2",
   quantity: "Quantity can not be less than 2",
   colors: "Minimum One color is required",
-  variant :"Minimum One variant is required",
+  variant: "Minimum One variant is required",
+}
+
+export const fieldMaxMessage = {
+  shippingCharge: "Shipping charge must be less than or equal to 100",
+  releaseDate: "Date must be in the future."
 }
