@@ -9,9 +9,10 @@ import Joi from "joi";
 import moment from "moment";
 
 
-export const getProducts = async (req, res) => {
+export const getProducts = async (req, res, next) => {
     try {
-        const products = await Products.find({ isVisible: true })
+        const products = await Products.find().populate("brand", "name -_id")
+            .lean()
 
         return res.status(HTTP_STATUS_OK).json({ success: true, products, message: productsMessages["fetched"] })
     } catch (error) {
@@ -66,6 +67,14 @@ export const createProduct = async (req, res, next) => {
     } catch (error) {
         logger.error({ label: "createProduct", message: error.message });
         next(error);
+    }
+}
+
+export const createVariant = async (req, res, next) => {
+    try {
+        console.log(req.body);
+    } catch (error) {
+        console.log(error);
     }
 }
 

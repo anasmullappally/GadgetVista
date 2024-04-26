@@ -77,12 +77,6 @@ const productSchema = new mongoose.Schema(
             type: Date,
             required: true
         },
-        // images:{}
-        // description: {
-        //     type: String,
-        //     required: true,
-        //     trim: true
-        // },
         accessories: {
             type: String,
             required: true,
@@ -93,6 +87,7 @@ const productSchema = new mongoose.Schema(
             required: true,
             trim: true
         },
+        variants: [{ type: mongoose.Schema.Types.ObjectId, ref: "Variants" }],
         // variants: [variantSchema],
         // quantityInfo: {
         //     total: {
