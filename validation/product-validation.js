@@ -18,11 +18,6 @@ export const createProductValidation = Joi.object({
         "any.required": fieldRequiredMessages["brand"],
         "any.only": fieldInvalidMessages["brand"],
     }),
-    // description: Joi.string().required().messages({
-    //     "string.empty": fieldEmptyMessages["description"],
-    //     "any.required": fieldRequiredMessages["description"],
-    //     "any.only": fieldInvalidMessages["description"],
-    // }),
     accessories: Joi.string().required().messages({
         "string.empty": fieldEmptyMessages["accessories"],
         "any.required": fieldRequiredMessages["accessories"],
@@ -46,78 +41,6 @@ export const createProductValidation = Joi.object({
         "string.pattern.base": fieldPatternMessages["releaseDate"],
         "date.min": fieldMaxMessage["releaseDate"]
     })
-
-    // variants: Joi.array()
-    //     .items(
-    //         Joi.object({
-    //             ram: Joi.number().min(1).required().messages({
-    //                 "any.required": fieldRequiredMessages["ram"],
-    //                 "number.base": fieldBaseMessages["ram"],
-    //                 "number.min": fieldMinMessages["ram"],
-    //                 "number.positive": fieldPatternMessages["ram"],
-    //                 "number.empty": fieldEmptyMessages["ram"],
-    //             }),
-    //             rom: Joi.number().min(1).required().messages({
-    //                 "any.required": fieldRequiredMessages["rom"],
-    //                 "number.base": fieldBaseMessages["rom"],
-    //                 "number.min": fieldMinMessages["rom"],
-    //                 "number.positive": fieldPatternMessages["rom"],
-    //                 "number.empty": fieldEmptyMessages["rom"],
-    //             }),
-    //             mrp: Joi.number().min(1).required().messages({
-    //                 "any.required": fieldRequiredMessages["mrp"],
-    //                 "number.base": fieldBaseMessages["mrp"],
-    //                 "number.min": fieldMinMessages["mrp"],
-    //                 "number.positive": fieldPatternMessages["mrp"],
-    //                 "number.empty": fieldEmptyMessages["mrp"],
-    //             }),
-    //             price: Joi.number().min(1).required().messages({
-    //                 "any.required": fieldRequiredMessages["price"],
-    //                 "number.base": fieldBaseMessages["price"],
-    //                 "number.min": fieldMinMessages["price"],
-    //                 "number.positive": fieldPatternMessages["price"],
-    //                 "number.empty": fieldEmptyMessages["price"],
-    //             }),
-    //             quantity: Joi.number().min(1).required().messages({
-    //                 "any.required": fieldRequiredMessages["quantity"],
-    //                 "number.base": fieldBaseMessages["quantity"],
-    //                 "number.min": fieldMinMessages["quantity"],
-    //                 "number.positive": fieldPatternMessages["quantity"],
-    //                 "number.empty": fieldEmptyMessages["quantity"],
-    //             }),
-    //             shippingCharge: Joi.number().required().messages({
-    //                 "any.required": fieldRequiredMessages["shippingCharge"],
-    //                 "number.base": fieldBaseMessages["shippingCharge"],
-    //                 "number.positive": fieldPatternMessages["shippingCharge"],
-    //                 "number.empty": fieldEmptyMessages["shippingCharge"],
-    //             }),
-    //             colors: Joi.array().items(
-    //                 Joi.object({
-    //                     color: Joi.string().required().messages({
-    //                         "string.empty": fieldEmptyMessages["color"],
-    //                         "any.required": fieldRequiredMessages["color"],
-    //                         "any.only": fieldInvalidMessages["color"],
-    //                     }),
-    //                     colorCode: Joi.string().required().messages({
-    //                         "string.empty": fieldEmptyMessages["colorCode"],
-    //                         "any.required": fieldRequiredMessages["colorCode"],
-    //                         "any.only": fieldInvalidMessages["colorCode"],
-    //                     }),
-    //                 })
-    //             ).min(1)
-    //                 .required()
-    //                 .messages({
-    //                     "any.required": fieldRequiredMessages["colors"],
-    //                     "array.min": fieldMinMessages["colors"],
-    //                 })
-    //         })
-    //     ).min(1)
-    //     .required()
-    //     .messages({
-    //         "any.required": fieldRequiredMessages["variant"],
-    //         "array.min": fieldMinMessages["variant"],
-    //     })
-
 });
 
 export const addBrandValidation = Joi.object({
@@ -125,5 +48,64 @@ export const addBrandValidation = Joi.object({
         "string.empty": fieldEmptyMessages["brand"],
         "any.required": fieldRequiredMessages["brand"],
         "any.only": fieldInvalidMessages["brand"],
+    }),
+})
+
+export const variantValidation = Joi.object({
+    selectedProduct: Joi.string().pattern(/^[0-9a-fA-F]{24}$/).required().messages({
+        "string.base": fieldBaseMessages["selectedProduct"],
+        "string.empty": fieldEmptyMessages["selectedProduct"],
+        "any.required": fieldRequiredMessages["selectedProduct"],
+        "string.pattern.base": fieldPatternMessages["selectedProduct"],
+    }),
+    description: Joi.string().required().messages({
+        "string.empty": fieldEmptyMessages["description"],
+        "any.required": fieldRequiredMessages["description"],
+        "any.only": fieldInvalidMessages["description"],
+    }),
+    ram: Joi.number().min(1).required().messages({
+        "any.required": fieldRequiredMessages["ram"],
+        "number.base": fieldBaseMessages["ram"],
+        "number.min": fieldMinMessages["ram"],
+        "number.positive": fieldPatternMessages["ram"],
+        "number.empty": fieldEmptyMessages["ram"],
+    }),
+    rom: Joi.number().min(1).required().messages({
+        "any.required": fieldRequiredMessages["rom"],
+        "number.base": fieldBaseMessages["rom"],
+        "number.min": fieldMinMessages["rom"],
+        "number.positive": fieldPatternMessages["rom"],
+        "number.empty": fieldEmptyMessages["rom"],
+    }),
+    mrp: Joi.number().min(1).required().messages({
+        "any.required": fieldRequiredMessages["mrp"],
+        "number.base": fieldBaseMessages["mrp"],
+        "number.min": fieldMinMessages["mrp"],
+        "number.positive": fieldPatternMessages["mrp"],
+        "number.empty": fieldEmptyMessages["mrp"],
+    }),
+    price: Joi.number().min(1).required().messages({
+        "any.required": fieldRequiredMessages["price"],
+        "number.base": fieldBaseMessages["price"],
+        "number.min": fieldMinMessages["price"],
+        "number.positive": fieldPatternMessages["price"],
+        "number.empty": fieldEmptyMessages["price"],
+    }),
+    quantity: Joi.number().min(1).required().messages({
+        "any.required": fieldRequiredMessages["quantity"],
+        "number.base": fieldBaseMessages["quantity"],
+        "number.min": fieldMinMessages["quantity"],
+        "number.positive": fieldPatternMessages["quantity"],
+        "number.empty": fieldEmptyMessages["quantity"],
+    }),
+    color: Joi.string().required().messages({
+        "string.empty": fieldEmptyMessages["color"],
+        "any.required": fieldRequiredMessages["color"],
+        "any.only": fieldInvalidMessages["color"],
+    }),
+    colorCode: Joi.string().required().messages({
+        "string.empty": fieldEmptyMessages["colorCode"],
+        "any.required": fieldRequiredMessages["colorCode"],
+        "any.only": fieldInvalidMessages["colorCode"],
     }),
 })

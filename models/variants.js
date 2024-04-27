@@ -4,9 +4,16 @@ const variantSchema = new mongoose.Schema(
     {
         product: {
             type: mongoose.Schema.Types.ObjectId,
+            ref: "Products",
             required: true
         },
-        // images:{}
+        brand: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: "Brands",
+            required: true
+        },
+        images: [],
         description: {
             type: String,
             required: true,
@@ -46,6 +53,14 @@ const variantSchema = new mongoose.Schema(
             type: String,
             trim: true,
             required: true
+        },
+        releaseDate: {
+            type: Date,
+            required: true
+        },
+        isVisible: {
+            type: Boolean,
+            default: true
         }
     }, { collection: "Variants", timestamps: true }
 );

@@ -12,3 +12,9 @@ export const brandMessages = {
     "created": "New brand created successfully",
     "fetched": "Brands fetched successfully"
 }
+
+export const variantMessages = {
+    "product-not-exist": "Please verify that the product doesn't exist in the database.",
+    "success": "Variant added successfully",
+    "fetched": "Variants fetched successfully"
+}
