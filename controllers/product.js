@@ -57,6 +57,8 @@ export const getProducts = async (req, res, next) => {
             .populate("variants",)
             .lean()
 
+        logger.info({ label: "getProducts", message: productsMessages["fetched"] });
+
         return res.status(HTTP_STATUS_OK).json({ success: true, products, message: productsMessages["fetched"] })
     } catch (error) {
         logger.error({ label: "getProducts", message: error.message });
@@ -64,6 +66,24 @@ export const getProducts = async (req, res, next) => {
     }
 }
 
+
+export const getSingleProduct = async (req, res, next) => {
+    try {
+        console.log(req);
+        const { productId } = req.params
+        const product = await Products.findById(productId)
+            .populate("brand", "name -_id")
+            .populate("variants")
+            .lean()
+        console.log(product);
+        logger.info({ label: "getSingleProduct", message: productsMessages["productFetched"] });
+
+        return res.status(HTTP_STATUS_OK).json({ success: true, product, message: productsMessages["productFetched"] })
+    } catch (error) {
+        logger.error({ label: "getSingleProduct", message: error.message });
+        next(error);
+    }
+}
 
 export const createProduct = async (req, res, next) => {
     try {
@@ -158,8 +178,8 @@ export const createVariant = async (req, res, next) => {
         variant.images = images
         product.variants.push(variant._id)
         const brand = await Brands.findById(product.brand)
-        brand.totalProducts += variant.quantity
-        brand.activeProducts += variant.quantity
+        brand.totalProducts++
+        brand.activeProducts++
         await variant.save()
         await product.save()
         await brand.save()
@@ -180,9 +200,26 @@ export const getVariants = async (req, res, next) => {
             .populate("brand", "name -_id")
             .lean()
 
-        logger.info({ label: "getVariants", message: productsMessages["fetched"] });
-        return res.status(HTTP_STATUS_OK).json({ success: true, variants, message: productsMessages["fetched"] })
+        logger.info({ label: "getVariants", message: variantMessages["fetched"] });
+        return res.status(HTTP_STATUS_OK).json({ success: true, variants, message: variantMessages["fetched"] })
 
+    } catch (error) {
+        logger.error({ label: "getVariants", message: error.message });
+        next(error);
+    }
+}
+
+export const getSingleVariant = async (req, res, next) => {
+    try {
+        const { variantId } = req.params
+        //validation
+        const variant = await Variants.findById(variantId)
+            .populate("product", "name shippingCharge warrantyInfo accessories")
+            .populate("brand", "name -_id")
+            .lean()
+
+        logger.info({ label: "getVariants", message: variantMessages["singleVariantFetched"] });
+        return res.status(HTTP_STATUS_OK).json({ success: true, variant, message: productsMessages["singleVariantFetched"] })
     } catch (error) {
         logger.error({ label: "getVariants", message: error.message });
         next(error);

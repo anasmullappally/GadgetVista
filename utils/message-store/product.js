@@ -4,7 +4,8 @@ export const productsMessages = {
     "product-added": "Product added successfully",
     "fetched": "Products fetched successfully",
     "releaseDate": "Release date must be in the future.",
-    "brandNotExist": "Brand is not exist please select valid brand"
+    "brandNotExist": "Brand is not exist please select valid brand",
+    "productFetched": "Product fetched successfully"
 }
 
 export const brandMessages = {
@@ -16,5 +17,6 @@ export const brandMessages = {
 export const variantMessages = {
     "product-not-exist": "Please verify that the product doesn't exist in the database.",
     "success": "Variant added successfully",
-    "fetched": "Variants fetched successfully"
+    "fetched": "Variants fetched successfully",
+    "singleVariantFetched": "Variant fetched successfully"
 }
