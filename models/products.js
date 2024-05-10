@@ -1,53 +1,5 @@
 import mongoose from "mongoose";
 
-// const variantSchema = new mongoose.Schema(
-//     {
-//         ram: {
-//             type: Number,
-//             required: true,
-//             min: 1
-//         },
-//         rom: {
-//             type: Number,
-//             required: true,
-//             min: 1
-//         },
-//         mrp: {
-//             type: Number,
-//             required: true,
-//             min: 1
-//         },
-//         price: {
-//             type: Number,
-//             required: true,
-//             min: 1
-//         },
-//         shippingCharge: {
-//             type: Number,
-//             required: true,
-//             min: 1
-//         },
-//         quantity: {
-//             type: Number,
-//             required: true,
-//             min: 1
-//         },
-//         colors: [
-//             {
-//                 color: {
-//                     type: String,
-//                     trim: true,
-//                     required: true
-//                 },
-//                 colorCode: {
-//                     type: String,
-//                     trim: true,
-//                     required: true
-//                 }
-//             }
-//         ]
-//     }
-// )
 
 const productSchema = new mongoose.Schema(
     {
@@ -88,22 +40,25 @@ const productSchema = new mongoose.Schema(
             trim: true
         },
         variants: [{ type: mongoose.Schema.Types.ObjectId, ref: "Variants" }],
-        // variants: [variantSchema],
-        // quantityInfo: {
-        //     total: {
-        //         type: Number,
-        //         required: true,
-        //         min: 1
-        //     },
-        //     sold: {
-        //         type: Number,
-        //         default: 0
-        //     }
-        // },
         isVisible: {
             type: Boolean,
             default: false
         },
+        ratings: {
+            overallRating: {
+                type: Number,
+                default: 0
+            },
+            numberOfRatings: {
+                type: Number,
+                default: 0
+            },
+            numberOfReview: {
+                type: Number,
+                default: 0
+            },
+
+        }
     },
     { collection: "Products", timestamps: true }
 );

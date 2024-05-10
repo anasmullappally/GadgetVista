@@ -30,7 +30,6 @@ const uploadImages = async (images, filenamePrefix) => {
                             console.error('Error uploading image:', error);
                             reject(error);
                         } else {
-                            // console.log('Image uploaded successfully:', result);
                             resolve({
                                 filename: filename,
                                 url: result.secure_url
@@ -69,13 +68,11 @@ export const getProducts = async (req, res, next) => {
 
 export const getSingleProduct = async (req, res, next) => {
     try {
-        console.log(req);
         const { productId } = req.params
         const product = await Products.findById(productId)
             .populate("brand", "name -_id")
             .populate("variants")
             .lean()
-        console.log(product);
         logger.info({ label: "getSingleProduct", message: productsMessages["productFetched"] });
 
         return res.status(HTTP_STATUS_OK).json({ success: true, product, message: productsMessages["productFetched"] })
@@ -141,7 +138,7 @@ export const createVariant = async (req, res, next) => {
             // console.log(width, "wdt");
             // Check if the width exceeds the maximum allowed width
             if (width > 400) {
-                console.log(file.originalname);
+                // console.log(file.originalname);
                 exceededImage = { index, width };
                 break; // Stop processing further images
             }
@@ -255,7 +252,6 @@ export const addBrand = async (req, res, next) => {
 export const getBrands = async (req, res, next) => {
     try {
         const brands = await Brands.find().select("name totalProducts activeProducts").lean()
-
         logger.info({ label: "getBrands", message: brandMessages["fetched"] });
         return res.status(HTTP_STATUS_OK).json({ success: true, brands, message: brandMessages["fetched"] })
     } catch (error) {
