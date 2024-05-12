@@ -193,7 +193,7 @@ export const getVariants = async (req, res, next) => {
     try {
 
         const variants = await Variants.find()
-            .populate("product", "name shippingCharge warrantyInfo accessories")
+            .populate("product", "name shippingCharge warrantyInfo accessories ratings")
             .populate("brand", "name -_id")
             .lean()
 
