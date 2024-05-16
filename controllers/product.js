@@ -10,6 +10,7 @@ import sharp from "sharp";
 import { v2 as cloudinary } from 'cloudinary';
 import { Variants } from "../models/variants.js";
 import dotenv from "dotenv";
+import { Ratings } from "../models/rating.js";
 dotenv.config();
 
 cloudinary.config({
@@ -73,9 +74,11 @@ export const getSingleProduct = async (req, res, next) => {
             .populate("brand", "name -_id")
             .populate("variants")
             .lean()
+        const reviews = await Ratings.find({ product: productId })
+
         logger.info({ label: "getSingleProduct", message: productsMessages["productFetched"] });
 
-        return res.status(HTTP_STATUS_OK).json({ success: true, product, message: productsMessages["productFetched"] })
+        return res.status(HTTP_STATUS_OK).json({ success: true, product, reviews, message: productsMessages["productFetched"] })
     } catch (error) {
         logger.error({ label: "getSingleProduct", message: error.message });
         next(error);
