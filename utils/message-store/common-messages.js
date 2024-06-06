@@ -17,7 +17,9 @@ export const fieldEmptyMessages = {
   price: "Please provide price details",
   quantity: "Please provide quantity details",
   shippingCharge: "Please provide shippingCharge details",
-  selectedProduct: "Please Provide selectedProduct"
+  selectedProduct: "Please Provide selectedProduct",
+  variant: "Please Provide variant",
+  cartType: "Please provide type"
 };
 
 export const fieldInvalidMessages = {
@@ -59,7 +61,8 @@ export const fieldRequiredMessages = {
   variant: "variant is required",
   colors: "Colors is required",
   releaseDate: "Date is required.",
-  selectedProduct: "selectedProduct is required"
+  selectedProduct: "selectedProduct is required",
+  cartType: "type is required"
 };
 
 export const fieldPatternMessages = {
@@ -77,7 +80,9 @@ export const fieldPatternMessages = {
   shippingCharge: "Shipping Charge must be a positive number",
   quantity: "Quantity must be a positive number",
   releaseDate: "Date must be in ISO date format (YYYY-MM-DD).",
-  selectedProduct: "Selected Product must be ObjectID"
+  selectedProduct: "Selected Product must be ObjectID",
+  variant: "variant must be ObjectID",
+  cartType: "type must be increment or decrement only"
 };
 
 export const fieldMaxMessages = {
@@ -93,6 +98,8 @@ export const fieldBaseMessages = {
   shippingCharge: "Shipping Charge must be Number",
   releaseDate: "Date must be a valid date.",
   selectedProduct: "Selected product must be objectID",
+  variant: "Selected product must be objectID",
+  cartType: "type must be a String"
 }
 
 export const fieldMinMessages = {

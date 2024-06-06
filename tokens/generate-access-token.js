@@ -23,7 +23,7 @@ export const generateNewAccessToken = async (req, res) => {
                 const { _id, role, batchID } = tokenDetails
 
                 // generating new access and refresh tokens
-                const accessToken = jwt.sign({ _id, role, verified, batchID }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "5m" })
+                const accessToken = jwt.sign({ _id, role, verified, batchID }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "7d" })
                 const newRefreshToken = jwt.sign({ _id, role, verified, batchID }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
 
 
